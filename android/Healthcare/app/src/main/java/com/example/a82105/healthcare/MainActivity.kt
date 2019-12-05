@@ -24,10 +24,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.R.attr.data
 import kotlinx.android.synthetic.main.introduce_popup.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity(){
-
     private val REQUEST_IMAGE_CAPTURE = 672
     private var imageFilePath: String? = null
     private var photoUri: Uri? = null
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("TAG","onCreate")
         super.onCreate(savedInstanceState)
+
 
         //권환체크
         TedPermission.with(applicationContext)
@@ -46,12 +51,39 @@ class MainActivity : AppCompatActivity(){
                 .check()
 
         setContentView(R.layout.activity_main)
+        setRetrofit()
 
         btn_capture.setOnClickListener()
         {
             startActivityForResult(Intent(this, IntroducePopup::class.java),1202)
         }
     }
+    private fun setRetrofit(){
+        Log.d("TAG","통신시작")
+        val retrofit=Retrofit.Builder()
+                .baseUrl("http://ec2-54-175-121-108.compute-1.amazonaws.com:8888/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+        Log.d("TAG","1")
+        val service=retrofit.create(Service::class.java)
+
+        val call: Call<beans> = service.ApiService()
+        call.enqueue(object :Callback<beans>{
+
+            override fun onFailure(call: Call<beans>, t: Throwable) {
+                Log.d("TAG","3")
+            }
+
+            override fun onResponse(call: Call<beans>, response: Response<beans>) {
+                if (response.body()!=null){
+                    textView1.text=response.body()!!.name
+                    Log.d("TAG",response.body()!!.name)
+                }
+            }
+        })
+    }
+
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
