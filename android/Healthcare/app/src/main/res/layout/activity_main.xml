@@ -24,12 +24,39 @@
     <ImageView
         android:id="@+id/iv_result"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="200dp"
+        android:src="@drawable/img2"
+        />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/open"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="갤러리 불러오기" />
+
+    <TextView
+        android:id="@+id/recvtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="동물버튼" />
+
+    <TextView
+        android:id="@+id/animaltext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="안녕하세요? 방학이 시작되었어요!" />
 
 </LinearLayout>

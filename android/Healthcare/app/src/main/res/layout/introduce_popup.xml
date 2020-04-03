@@ -9,8 +9,10 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="아에이오우" />
+        android:layout_height="450dp"
+        android:gravity="center"
+        android:text="가이드라인"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="메인으로" />
     </LinearLayout>
 </LinearLayout>
